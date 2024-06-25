@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stream_example/bloc/stopwatch_bloc.dart';
+import 'package:stream_example/bloc/stopwatch/stopwatch_bloc.dart';
 import 'package:stream_example/utils.dart';
 
 // StopWatchScreen 클래스를 StatefulWidget을 상속받아 정의합니다.
@@ -80,7 +80,7 @@ class BlocStopWatchScreen extends StatelessWidget {
                 heroTag: 'recordLap',
                 onPressed: () => context
                     .read<StopwatchBloc>()
-                    .add(const StopwatchRecordLap()), // 버튼을 누르면 타이머를 초기화합니다.
+                    .add(const StopwatchRecordLap()), // 버튼을 누르면 lap을 기록합니다..
                 tooltip: 'Record Lap', // 툴팁을 설정합니다.
                 child: const Icon(Icons.flag_outlined), // 아이콘을 설정합니다.
               ),

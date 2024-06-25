@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stream_example/bloc/stopwatch_bloc.dart';
+import 'package:stream_example/bloc/email/email_bloc.dart';
+import 'package:stream_example/bloc/email/name_bloc.dart';
+import 'package:stream_example/bloc/email/password_bloc.dart';
 import 'package:stream_example/example/ex1_clock_screen.dart';
 import 'package:stream_example/example/ex2_stop_watch_screen.dart';
 import 'package:stream_example/example/ex3_future_builder_example.dart';
 import 'package:stream_example/example/ex4_future_builder_http_example.dart';
 import 'package:stream_example/example/ex5_bloc_stop_watch_screen.dart';
+import 'package:stream_example/example/ex6_bloc_registration_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,8 +20,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<StopwatchBloc>(
-      create: (context) => StopwatchBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => EmailBloc()),
+        BlocProvider(create: (context) => NameBloc()),
+        BlocProvider(create: (context) => PasswordBloc()),
+      ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -29,6 +36,20 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+  // @override <-- 여기는 stopwatch 예제의 application root
+  // Widget build(BuildContext context) {
+  //   return BlocProvider<StopwatchBloc>(
+  //     create: (context) => StopwatchBloc(),
+  //     child: MaterialApp(
+  //       title: 'Flutter Demo',
+  //       theme: ThemeData(
+  //         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+  //         useMaterial3: true,
+  //       ),
+  //       home: const SliverExampleNavigatorList(),
+  //     ),
+  //   );
+  // }
 }
 
 final List<Map<String, dynamic>> _example = [
@@ -51,6 +72,10 @@ final List<Map<String, dynamic>> _example = [
   {
     'title': 'BlocStopWatchScreen',
     'widget': const BlocStopWatchScreen(),
+  },
+  {
+    'title': 'RegistrationPage',
+    'widget': const RegistrationPage(),
   },
 ];
 
